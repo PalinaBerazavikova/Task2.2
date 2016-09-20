@@ -35,7 +35,6 @@ namespace AnotherTask2
                 {
                     resultIntList.Add(resultInt);
                     numberOfInt++;
-                    
                 }
             }
 
@@ -49,8 +48,7 @@ namespace AnotherTask2
                     if (resultDouble % 1 > 0)
                     {
                         resultDoubleList.Add(resultDouble);
-                        numberOfDouble++;
-                        
+                        numberOfDouble++;   
                     }
                 }
             }
@@ -63,7 +61,6 @@ namespace AnotherTask2
                 sumInt = sumInt + outputInt;
             }
             Console.WriteLine($"Average: {(double)sumInt/(double)resultIntList.Count}".PadLeft(15, ' '));
-
 
             double sumDouble = 0;
             foreach (double outputDouble in resultDoubleList)
