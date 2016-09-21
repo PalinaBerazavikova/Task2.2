@@ -19,14 +19,19 @@ namespace AnotherTask2
 
         public void EnterStrings()
         {
+            //инициализация инпута
             this.Input = string.Empty;
             Console.WriteLine(Enter);
+            //пока не нажать стоп, пользователь будет вводить строку (отдельная строка рассматривается как единица)
             while (!this.Input.Equals(Stop))
             {
+                //если это не первый проход по циклу
                 if (!string.IsNullOrEmpty(this.Input))
                 {
+                    //добавляем строку в список
                     this.listString.Add(this.Input);
                 }
+
                 this.Input = Console.ReadLine();
             }
             Console.WriteLine($"{NumbOfInt} {ss.FindNumbers(this.listString)}");

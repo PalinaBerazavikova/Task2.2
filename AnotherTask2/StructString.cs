@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace AnotherTask2
@@ -44,11 +45,8 @@ namespace AnotherTask2
             {
                 if (Double.TryParse(str, out resultDouble))
                 {
-                    if (resultDouble % 1 > 0)
-                    {
-                        resultDoubleList.Add(resultDouble);
-                        this.NumberOfDouble++;
-                    }
+                    resultDoubleList.Add(resultDouble);
+                    this.NumberOfDouble++;
                 }
             }
             return this.NumberOfDouble;
@@ -72,8 +70,6 @@ namespace AnotherTask2
         {
             this.PrintInt(resultIntList);
             this.PrintDouble(resultDoubleList);
-            
-            this.PrintStrings(this.newListString);
         }
 
         public void PrintInt(List<int> list)
@@ -84,26 +80,48 @@ namespace AnotherTask2
                 Console.WriteLine($"Number: {output}".PadLeft(15, space));
                 this.SumInt = this.SumInt + output;
             }
-            Console.WriteLine($"Average: {(double)this.SumInt / (double)list.Count}".PadLeft(15, space));
+            if (resultDoubleList.Count > 0)
+            {
+                Console.WriteLine($"Average: {(double)this.SumInt / (double)list.Count}".PadLeft(15, space));
+            }else
+            {
+                Console.WriteLine($"Average: {0}".PadLeft(15, space));
+            }
         }
 
         public void PrintDouble(List<double> list)
         {
             foreach (double outputDouble in list)
             {
-                Console.WriteLine($"Double: {outputDouble:#.##}".PadLeft(15, space));
+                Console.WriteLine($"Double: {outputDouble:F}".PadLeft(15, space));
                 this.SumDouble = this.SumDouble + outputDouble;
             }
-            Console.WriteLine($"Average: {this.SumDouble / resultDoubleList.Count:#.##}".PadLeft(15, space));
+            if (resultDoubleList.Count>0)
+            {
+                Console.WriteLine($"Average: {this.SumDouble / resultDoubleList.Count:F}".PadLeft(15, space));
+            }else
+            {
+                Console.WriteLine($"Average: {0:F}".PadLeft(15, space));
+            }
         }
 
         public void PrintStrings(List<string> list)
         {
-            list.Sort();
-            foreach (string lines in list)
+            var sorted = this.SortByLength(list);
+            foreach (string lines in sorted)
             {
                 Console.WriteLine(lines);
             }
+        }
+
+        public IEnumerable<string> SortByLength(IEnumerable<string> e)
+        {
+            // Use LINQ to sort the array received and return a copy.
+            var sorted = from s in e
+                         orderby s.Length ascending
+                         orderby s
+                         select s;
+            return sorted;
         }
     }
 }

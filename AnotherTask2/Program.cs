@@ -11,6 +11,7 @@ namespace AnotherTask2
         static void Main(string[] args)
         {
             Talker tlkr = new Talker();
+           
             tlkr.EnterStrings();
           
         }
